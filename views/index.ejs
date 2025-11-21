@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GAMEVIEWS</title>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+
+  </head>
+  <body>
+    <%- include('modules/header.ejs') %>
+
+    <main>
+    <section class="carrousel d-flex justify-content-center"> <!-- bg-black -->
+        <div
+          id="carouselExampleFade"
+          class="carousel slide carousel-fade"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="https://64.media.tumblr.com/4b231c144d487b045939f243ef343e02/tumblr_n5mgqwAZtR1tazzs4o1_500.gif"
+                class="d-block w-100 bg-black"
+                alt="..."
+              >
+              <div class="carousel-caption d-none d-md-block">
+                <h2>SKYRIM</h2>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://giffiles.alphacoders.com/863/8633.gif"
+                class="d-block w-100 bg-black"
+                alt="..."
+              >
+              <div class="carousel-caption d-none d-md-block">
+                <h2>DESTINY</h2>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://giffiles.alphacoders.com/139/13905.gif"
+                class="d-block w-100"
+                alt="..."
+              >
+              <div class="carousel-caption d-none d-md-block">
+                <h2>LEAGUE OF LEGENDS</h2>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzY1em94azFqa3ZjeGE3am5zN3I2MHZsNjBqZ2RuNnRmbXhkbzhiZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pfRPCkuhXyyvQ8Tpjf/giphy.gif"
+                class="d-block w-100"
+                alt="..."
+              >
+              <div class="carousel-caption d-none d-md-block">
+                <h2>HALO</h2>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzZ3N3JwYmh6dXZjajc3MHVjOGhiZ3J5amRiYXV4aHlzbGJxZm5ocSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Qm9DTI1iz1nMq5wkZ2/giphy.gif"
+                class="d-block w-100"
+                alt="..."
+              >
+              <div class="carousel-caption d-none d-md-block">
+                <h2>ASSASSINS CREED: UNITY</h2>
+              </div>
+            </div>
+
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="prev"
+          >
+            <span
+              class="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            data-bs-slide="next"
+          >
+            <span
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="section-users">
+        <h2 class="text-center bg-dark p-4">USUARIOS</h2>      
+      <div class="d-flex flex-wrap p-5" style="gap: 3rem;">
+        <!-- FOR EACH -->
+        <% user.forEach((elem) => { %>
+        <div 
+          class="card mb-3 container-fluid" 
+          style="max-width: 500px;">
+          <div class="row">
+            <div class="col-md-4">
+              <img 
+                src="/images/<%= elem.avatar?elem.avatar:'briar.jpg' %>" 
+                class="img-fluid rounded-start pt-2" 
+                alt="..."
+              >
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= elem.name %></h5>
+                <p class="card-text"><%= elem.bio %></p>
+                <p class="card-text"><small class="text-body-secondary">Reviews: <!-- ¿cómo conecto el sql para que salga la cuenta? --></small></p>
+                <button 
+                  onclick="window.location.href='/user/userX/<%= elem.user_id %>'"
+                  class="btn btn-info">Ver más
+                </button>
+              </div>          
+            </div>          
+          </div>
+        </div>
+
+        <% }); %>
+
+      </div>
+      </section>
+
+    
+    </main>
+
+    <%- include('modules/footer.ejs') %>
+    <%- include('modules/links.ejs') %>
+  </body>
+</html>

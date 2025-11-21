@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GAMEVIEWS</title>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link rel="stylesheet" href="/stylesheets/oneElem.css" />
+
+  </head>
+  <body>
+    <%- include('modules/header.ejs') %>
+
+    <main>
+
+      <section class="sect-backg">
+        <div class="title bg-dark ">
+          <h2 class="text-center pt-3 pb-2 text-white">Perfil de <%= user.name %></h2>   
+          <div class="container-fluid pb-4 text-center">
+            <a href="/" class="btn btn-warning">Volver</a>
+          </div>
+       </div>
+        <div class="user-info p-4">
+        <div 
+          class="card mb-3 container-fluid p-1" 
+          style="max-width: 600px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img 
+                src="/images/<%= user.avatar?user.avatar:'briar.jpg' %>" 
+                class="img-fluid rounded-start pt-2" 
+                alt="..."
+              >
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= user.name %></h5>
+                <p class="card-text">Email: <%= user.email %></p>
+                <p class="card-text">Bio: <%= user.bio %></p>
+             <div class="text-end">
+              <a 
+                href="/user/userEdit/<%= user.user_id %>"
+                class="btn btn-info">Editar
+              </a>
+              <a 
+                href="/user/deleteUser/<%= user.game_id %>"
+                class="btn btn-info">Eliminar
+              </a>
+              <a 
+                href="/user/deleteLogicUser/<%= user.game_id %>"
+                class="btn btn-info">Borrador
+              </a>
+            </div>
+            </div>
+            </div>                
+          </div>    
+          </div>
+        </div>
+       
+      </section>
+
+
+
+
+      <!-- GAMES -->
+       <section class="section-users">
+        <div class="title bg-dark ">
+          <h2 class="text-center pt-3 pb-2">Juegos compartidos de <%= user.name %></h2>   
+          <div class="container-fluid pb-4 text-center">
+          <button 
+            onclick="window.location.href='/game/shareUser/<%= user.user_id %>'"
+            class="btn btn-warning"
+            >Añadir juego
+          </button>           
+          </div>  
+        </div>    
+
+      <div class="d-flex flex-wrap p-5">
+        <!-- FOR EACH -->
+        <% game.forEach((elem) => { %>
+        <div 
+          class="card mb-3 container-fluid" 
+          style="max-width: 600px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img 
+                src="/images/<%= elem.cover?elem.cover:'briar.jpg' %>" 
+                class="img-fluid rounded-start pt-3" 
+                alt="..."
+              >
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= elem.title %></h5>
+                <p class="card-text">Rating: <%= elem.rating %></p>
+                <p class="card-text">Plataforma: <%= elem.platform %></p>
+                <p class="card-text">Año de lanzamiento: <%= elem.release_year %></p>
+                <p class="card-text">Review: <%= elem.review %></p>
+                <div class="text-end">
+                <a 
+                  href="/game/gameEdit/<%= elem.game_id %>"
+                  class="btn btn-info">Editar
+                </a>
+                <a 
+                  href="/game/gameDelete/<%= elem.game_id %>"
+                  class="btn btn-info">Eliminar
+                </a>
+                <a 
+                  href="/game/gameDeleteLogic/<%= elem.game_id %>"
+                  class="btn btn-info">Borrador
+                </a>
+              </div>
+              </div>                        
+            </div>          
+          </div>
+        </div>
+
+        <% }); %>
+      </div>
+      </section>
+
+    
+    </main>
+
+    <%- include('modules/footer.ejs') %>
+    <%- include('modules/links.ejs') %>
+  </body>
+</html>
