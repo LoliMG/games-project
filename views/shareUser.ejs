@@ -23,22 +23,41 @@
         <br>
         <div class="form-div bg-secondary container-fluid">
           <form 
-            action="" 
+            action="/game/shareUser/<%= user_id %>" 
             method="post" 
+            enctype="multipart/form-data"
             class="text-black fs-5"
           >
+          <input for="user_id" value="<%= user_id %>" disabled>
             <div>
-              <label for="" class="text-black">Título del juego</label>
+              <label 
+                for="title" 
+                class="text-black"
+                >Título del juego
+              </label>
               <br>
               <input 
-              type="text" 
+                type="text" 
+                id="title"
                 name="title"
-                required
               >                    
               </div>
+              
+              <div>        
+              <label for="" class="pt-2">Valoración</label>
+              <input type="number" min="1" max="5" name="rating" id="rating">
+              </div>
               <div>
-              <label for="" class="text-black">Plataforma</label>
-              <select name="" id="" placeholder="Selecciona una plataforma" required>
+              <label 
+                for="platform" 
+                class="text-black"
+                >Plataforma
+              </label>
+              <select 
+                name="platform" 
+                id="platform" 
+                placeholder="Selecciona una plataforma" 
+                >
                 <option disabled selected>Selecciona una plataforma</option>
                 <option value="PlayStation">PlayStation</option>
                 <option value="PC">PC</option>
@@ -46,23 +65,14 @@
                 <option value="Juegos de mesa">Juegos de mesa</option>
               </select>                   
               </div>
-              <div>        
-              <label for="" class="pt-2">Valoración</label>
-              <select name="" id="" placeholder="Selecciona una plataforma" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-              </div>
               <div>
               <label for="" class="pt-2">Año de publicación</label>
               <br>
               <input 
                 type="text" 
+                id="release_year"
                 name="release_year"
-                required
+              
               >
               </div>
               <div>
@@ -71,12 +81,17 @@
               <textarea 
                 type="text" 
                 name="review"
+                id="review"
               ></textarea>              
             </div>
-            <div class="pt-1 pb-3">
+            <div class="pt-1 pb-3 d-flex" style="gap:1rem;">
               <label for="file" class="button btn btn-warning">Portada
                 <input type="file" id="file" hidden name="img">
               </label>
+              
+              <div class="text-warning">
+                <%= message %>
+              </div>
             </div>
             <div class="text-center">
               <button class="btn btn-info">Enviar</button>

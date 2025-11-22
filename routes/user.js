@@ -9,11 +9,13 @@ router.get('/userX/:id', userController.openUser);
 router.get('/register', userController.openRegister);
 router.post('/register', loadimg('/images/users'), userController.register);
 
+/* falta */
 router.get("/login", userController.openLogin);
 router.post("login", userController.login);
 
-router.get("/userEdit", userController.openEdit);
-router.post("/userEdit", loadimg('/images/users'), userController.editProfile);
+/* falta */
+router.get("/userEdit/:user_id", userController.openEdit);
+router.post("/userEdit/:user_id", loadimg('images'), userController.editProfile);
 
 
 module.exports = router;

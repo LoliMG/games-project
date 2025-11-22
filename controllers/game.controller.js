@@ -4,6 +4,7 @@ class GameController {
   /* share */
   /* share general */
   openShare = (req, res) => {
+    const {game} = req.params;
     res.render("share");
   }
 
@@ -13,15 +14,40 @@ class GameController {
 
   /* share from profile */
   openShareUser = (req, res) => {
-    res.render("shareUser");
+    const {user_id} = req.params;
+    res.render("shareUser", {user_id: user_id, message: ""});
   }
 
   shareUser = (req, res) => {
-    res.redirect("/")
+    const {user_id} = req.params;
+    const {title, rating, platform, release_year, review} = req.body;
+
+    console.log(req.params);
+    console.log(req.body);
+
+    if(!title||!rating||!platform||!release_year||!review) {
+      res.render("shareUser", {message: "¡Rellene todos los campos!", user_id: user_id})
+    }
+    else if (!req.file) {
+      res.render("shareUser", {message: "¡Inserte una imagen!", user_id: user_id})
+    }
+    else { //to db 
+      let sql = `INSERT INTO game (user_id, title, rating, platform, release_year, review, cover) VALUES (?,?,?,?,?,?,?)`;
+      let values = [user_id, title, rating, platform, release_year, review, req.file.filename];
+
+      connection.query(sql, values, (err, result) => {
+        if(err){
+          throw err;
+        }
+        else {
+          res.redirect(`/user/userX/${user_id}`)
+        }
+      })
+    }    
   }
 
   /* edit */
-  openEdit = (req, res) => {
+  openEditGame = (req, res) => {
     let {game_id} = req.params;    
     let sql = `SELECT * FROM game WHERE game_id = ?`;
     let values = [game_id];
@@ -31,21 +57,22 @@ class GameController {
         throw err;
       }
       else {
-        res.render("gameEdit", {gameToEdit: result[0]});
+        res.render("gameEdit", {gameToEdit: result[0], message: ""});
       }
     })          
   }     
-  
-  edit = (req, res) => {
+
+  // ! NO SÉ CÓMO HACER PARA QUE FUNCIONE CON EL SELECT
+  edit = (req, res) => {      
     const {title, rating, platform, release_year, review} = req.body;
     const {game_id, user_id} = req.params;
 
     let sql = `UPDATE game SET title = ?, rating = ?, platform = ?, release_year = ?, review = ? WHERE game_id = ?`;
-    let values = [game_id, title, rating, platform, release_year, review];
+    let values = [title, rating, platform, release_year, review, game_id];
 
     if(req.file != undefined) {
       sql = `UPDATE game SET title = ?, rating = ?, platform = ?, release_year = ?, review, cover = ? WHERE game_id = ?`;
-      values = [game_id, title, rating, platform, release_year, review, req.file.filename];
+      values = [title, rating, platform, release_year, review, req.file.filename, game_id];
     }    
 
     connection.query(sql, values, (err, result) => {
@@ -57,8 +84,6 @@ class GameController {
       }
     })
   }
-
-
  
   /* eliminar juego */
 

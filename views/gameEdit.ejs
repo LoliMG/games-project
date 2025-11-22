@@ -19,19 +19,15 @@
 
     <main>
       <section>
-        <h1 class="text-center p-3 bg-dark text-white">Editar: <%= gameToEdit.title %> de </h1>
+        <h1 class="text-center p-3 bg-dark text-white">Editar: <%= gameToEdit.title %> <!-- de  (user.name) --></h1>
         <br>
         <div class="form-div bg-secondary container-fluid">
           <form 
-            action='/game/gameEdit/<%= gameToEdit.game_id %>/<%= gameToEdit.user_id %>' 
+            action="/game/gameEdit/<%= gameToEdit.game_id %>/<%= gameToEdit.user_id %>" 
             method="post" 
+            enctype="multipart/form-data"
             class="text-black fs-5"
           >
-          <div>
-            <label for="">Usuario</label>
-            <br>
-            <input name="" id="" required value="<%= gameToEdit.user_id %>">             
-          </div>
             <div>
               <label for="" class="text-black">Título del juego</label>
               <br>
@@ -40,20 +36,30 @@
                 name="title"
                 value="<%= gameToEdit.title %>"
               >                    
+              </div>              
+              <div>        
+              <label for="" class="pt-2">Valoración</label>
+              <input 
+                type="number" 
+                name="rating" 
+                max="5" 
+                min="1" 
+                id="" 
+                value="<%= gameToEdit.rating %>"
+              >
               </div>
+              
               <div>
               <label for="" class="text-black">Plataforma</label>
               <select name="" id="" value="<%= gameToEdit.platform %>">
+                <option value="<%= gameToEdit.platform %>" disabled><%= gameToEdit.platform %></option>
                 <option value="PlayStation">PlayStation</option>
                 <option value="PC">PC</option>
                 <option value="Nintendo">Nintendo</option>
                 <option value="Juegos de mesa">Juegos de mesa</option>
               </select>                   
               </div>
-              <div>        
-              <label for="" class="pt-2">Valoración</label>
-              <input type="number" max="5" min="1" id="" value="<%= gameToEdit.rating %>">
-              </div>
+
               <div>
               <label for="" class="pt-2">Año de publicación</label>
               <br>
@@ -70,7 +76,9 @@
                 type="text" 
                 name="review"
                 value="<%= gameToEdit.review %>"
-              ></textarea>              
+              >
+              <%=gameToEdit.review %>
+              </textarea>              
             </div>
             <div class="pt-1 pb-3">
               <label for="file" class="button btn btn-warning">Portada
@@ -81,11 +89,14 @@
                   name="img" 
                   value="<%= gameToEdit.cover %>">
               </label>
+              <div class="text-danger">
+                <%= message %>
+              </div>
             </div>
             <div class="text-center">
               <button class="btn btn-info">Enviar</button>
               <button class="btn btn-info" type="reset">Limpiar</button>
-              <a href="/" class="btn btn-info">Cancelar</a>
+              <a href="/user/userX/<%= gameToEdit.user_id %>" class="btn btn-info">Cancelar</a>
             </div>
           </form>
             </div>

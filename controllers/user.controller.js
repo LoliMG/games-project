@@ -5,7 +5,7 @@ class UserController {
   openUser = (req, res) => {
     let {id} = req.params;
     
-    let sql = `SELECT * FROM user WHERE user_id = ? AND user_deleted = 0`;
+    let sql = `SELECT * FROM user WHERE user_id = ?`;
     let values = [id];
 
     connection.query(sql, values, (err, result) => {
@@ -13,7 +13,7 @@ class UserController {
         throw err;
       }
       else {
-        let sqlGame = `SELECT * FROM game WHERE user_id = ? AND game_deleted = 0`;
+        let sqlGame = `SELECT * FROM game WHERE user_id = ?`;      
         let valueGame = [id];
 
         connection.query(sqlGame, valueGame, (err2, result2) => {
@@ -70,11 +70,45 @@ class UserController {
 
   /* edit */
   openEdit = (req, res) => {
-    res.render("userEdit");
+    const {user_id} = req.params;
+    let sql = `SELECT * FROM user WHERE user_id = ?`;
+    let values = [user_id];
+
+    connection.query(sql, values, (err, result) => {
+      if(err){
+        throw err;
+      }
+      else {
+         res.render("userEdit", {userToEdit: result[0]});
+      }
+    })       
   }
 
   editProfile = (req, res) => {
-    res.redirect("/");
+    const {user_id} = req.params;
+    const {name, bio} = req.body;    
+
+    if(!name||!bio){
+      res.render('editProfile', {message: "Campo vacío", userToEdit: user_id});
+    }
+    else {
+      let sql = `UPDATE user SET name = ?, bio = ? WHERE user_id = ?`;
+      let values = [name, bio, user_id];      
+      
+      if(req.file != undefined) {
+        sql = `UPDATE user SET name = ?, bio = ?, avatar = ? WHERE user_id = ?`;
+        values = [name, bio, req.file.filename, user_id];
+      }
+         
+      connection.query(sql, values,(err, result) => {
+        if(err){
+          throw err;
+        }
+        else {
+          res.redirect(`/user/userX/${user_id}`);
+        }
+      })          
+    }
   }
 
   /* login */

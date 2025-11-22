@@ -23,33 +23,43 @@
         <br>
         <div class="form-div bg-secondary container-fluid">
           <form 
-            action="" 
+            action="/user/userEdit/<%= userToEdit.user_id %>" 
             method="post" 
             class="text-black fs-5"
+            enctype="multipart/form-data"
           >
-              <div>
-              <label for="" class="pt-2">Contraseña</label>
-              <br>
+            <div>
+              <label for="" class="pt-2">Nombre de usuario</label>
               <input 
-                type="text" 
-                name="password"
+                for="" 
+                type="text"
+                name="name" 
+                value="<%= userToEdit.name %>"
               >
-              </div>
+            </div>
               <div>
               <label for="" class="pt-2">Bio</label>
               <br>
               <textarea 
                 type="text" 
                 name="bio"
-              ></textarea>              
+                value="<%= userToEdit.bio %>"
+              ><%= userToEdit.bio %>
+            </textarea>              
             </div>
             <div class="pt-3 pb-3">
               <label for="file" class="button btn btn-warning">Avatar
-                <input type="file" id="file" hidden>
+                <input 
+                  type="file" 
+                  id="file" 
+                  hidden
+                  name="img"
+                  value="<%= userToEdit.avatar %>"
+                >
               </label>
             </div>
             <div class="text-center">
-              <button class="btn btn-info">Acceder</button> 
+              <button class="btn btn-info">Aceptar</button> 
               <!-- Que te lleve a tu perfil -->
               <a href="/" class="btn btn-info">Cancelar</a>
             </div>
