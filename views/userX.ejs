@@ -49,14 +49,6 @@
                 href="/user/userEdit/<%= user.user_id %>"
                 class="btn btn-info">Editar
               </a>
-              <a 
-                href="/user/deleteUser/<%= user.game_id %>"
-                class="btn btn-info">Eliminar
-              </a>
-              <a 
-                href="/user/deleteLogicUser/<%= user.game_id %>"
-                class="btn btn-info">Borrador
-              </a>
             </div>
             </div>
             </div>                
@@ -78,6 +70,11 @@
             onclick="window.location.href='/game/shareUser/<%= user.user_id %>'"
             class="btn btn-warning"
             >Añadir juego
+          </button>
+          <button 
+            onclick="window.location.href='/game/draft'"
+            class="btn btn-warning"
+            >Ver borradores
           </button>           
           </div>  
         </div>    
@@ -108,14 +105,15 @@
                   href="/game/gameEdit/<%= elem.game_id %>"
                   class="btn btn-info">Editar
                 </a>
-                <a 
-                  href="/game/gameDelete/<%= elem.game_id %>"
-                  class="btn btn-info">Eliminar
-                </a>
-                <a 
-                  href="/game/gameDeleteLogic/<%= elem.game_id %>"
-                  class="btn btn-info">Borrador
-                </a>
+      
+                <button 
+                  onclick="window.location.href='/game/gameDeleteLogic/<%= elem.game_id %>'"
+                  class="btn btn-success">Borrador
+              </button>          
+                <button 
+                  onclick="window.location.href='/game/gameDelete/<%= elem.game_id %>'"
+                  class="btn btn-danger">Eliminar
+              </button>
               </div>
               </div>                        
             </div>          

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GAMEVIEWS</title>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    >
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+
+  </head>
+  <body>
+    <%- include('modules/header.ejs') %>
+
+    <main>
+
+      <section class="section-users">
+        <h2 class="text-center bg-dark p-4">TODOS LOS JUEGOS PUBLICADOS</h2>      
+      <div class="d-flex flex-wrap p-5">
+        <% game.forEach((elem) => { %>
+        <div 
+          class="card mb-3 container-fluid" 
+          style="max-width: 600px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img 
+                src="/images/<%= elem.cover %>" 
+                class="img-fluid rounded-start pt-3" 
+                alt="..."
+              >
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= elem.title %></h5>
+                <p class="card-text">Rating: <%= elem.rating %></p>
+                <p class="card-text">Plataforma: <%= elem.platform %></p>
+                <p class="card-text">Año de lanzamiento: <%= elem.release_year %></p>
+                <p class="card-text">Review: <%= elem.review %></p>
+                <div class="text-end">
+                <p>Publicado por:  
+                  <a class="text-info" href="/user/userX/<%= elem.user_id %>"> USUARIO <%=  %></a> 
+                </p>
+                <!-- <a href="/user/userX/"></a> -->
+              </div>
+              </div>                        
+            </div>          
+          </div>
+        </div>
+
+        <% }); %>
+      </div>
+      </section>
+
+    
+    </main>
+
+    <%- include('modules/footer.ejs') %>
+    <%- include('modules/links.ejs') %>
+  </body>
+</html>

@@ -50,9 +50,14 @@
               </div>
               
               <div>
-              <label for="" class="text-black">Plataforma</label>
-              <select name="" id="" value="<%= gameToEdit.platform %>">
-                <option value="<%= gameToEdit.platform %>" disabled><%= gameToEdit.platform %></option>
+              <label 
+                for="platform" 
+                class="text-black" 
+                value="<%= gameToEdit.platform %>"
+                >Plataforma
+              </label>
+              <select name="platform" id="platform">
+                <option value="<%= gameToEdit.platform %>" selected><%= gameToEdit.platform %></option>
                 <option value="PlayStation">PlayStation</option>
                 <option value="PC">PC</option>
                 <option value="Nintendo">Nintendo</option>

@@ -13,14 +13,15 @@ class IndexController {
       }
     })
   }             
- 
-  /*    const {game_id, user_id} = req.params;   
+        /*
+        const {game_id, user_id} = req.params;   
         let sql2 = `SELECT count(game_id) AS reviews 
                     FROM game
                       JOIN user ON game.user_id = user.user_id
                     WHERE user.user_id = ?`;
           ? let value = {reviews here? how?} = req.body;    
-            TODO ¿Cómo hacer esto para que pueda poner la cuenta de los juegos que tiene?        
+            TODO ¿Cómo hacer esto para que pueda poner la cuenta de los juegos que tiene? 
+            TODO En SQL funciona :(       
             
         connection.query (sql2, (err2, result2) => {
           if(err2){
@@ -32,11 +33,8 @@ class IndexController {
       
       
         
-  }
+}
 
-
-
-  
 
 
 module.exports = new IndexController();
