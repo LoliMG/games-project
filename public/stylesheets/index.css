@@ -1,7 +1,6 @@
 .carrousel {
-  background-image: url("/images/296.jpg");
-  background-position: center;
-  background-size: cover;
+background: #000000;
+background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.745) 55%, rgba(0, 245, 233, 0.197) 100%);
 }
 
 .carousel {
@@ -33,6 +32,34 @@
   }
 }
 
-.section-users {
-  color: white;  
+.profile {  
+  display: flex;
+  justify-content: center;
+
+  .card {
+    border: 2px inset rgb(255, 239, 94);
+    border-radius: 1rem;
+    max-width: 480px;    
+    min-width: 390px;
+
+
+    &:hover {
+      outline: auto;
+    }
+
+ /*    @media (width <= 400) {
+    por si tengo que cambiarlo porque se desbarataaa
+    } */
+  }
+
+  img {
+    border-radius: 1rem 0 0 1rem ;
+  }
+  
+  .row {
+    max-width: 540px; 
+    max-height: fit-content;
+  }
+
+
 }

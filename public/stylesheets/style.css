@@ -4,14 +4,63 @@
   box-sizing: border-box;
 }
 
-main {
-  background-color: black;
+main {  
   min-height: 80dvh;
-  background-image:
-    radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),
-    radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px),
-    radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px),
-    radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
-  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  /* https://css-pattern.com/cubes-illusion/ */
+
+  --s: 200px; /* control the size*/
+  --c1: #121212;
+  --c2: #000000;
+  --c3: #080808;
+
+  background:
+    repeating-conic-gradient(from 30deg,#00000000 0 120deg,var(--c3) 0 50%) 
+     calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+    repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 50%);
+  background-size: var(--s) calc(var(--s)*tan(30deg));
+}
+
+.section-users {
+  color: white;
+}
+
+.navbar-brand {
+  border: 2px inset goldenrod;
+  border-radius: 1rem;
+
+  &:hover {
+    outline: auto;
+  }
+
+  
+}
+
+.navbar-nav {
+  gap: 1rem;
+
+.nav-item {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.068);
+      border-radius: 1rem;
+    }
+  }
+}
+
+
+.tomorrow-regular {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tomorrow-medium {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.tomorrow-bold {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }

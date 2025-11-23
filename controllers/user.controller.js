@@ -13,7 +13,7 @@ class UserController {
         throw err;
       }
       else {
-        let sqlGame = `SELECT * FROM game WHERE user_id = ?`;      
+        let sqlGame = `SELECT * FROM game WHERE user_id = ? AND game_deleted = 0`;      
         let valueGame = [id];
 
         connection.query(sqlGame, valueGame, (err2, result2) => {
@@ -22,6 +22,33 @@ class UserController {
           }
           else {
             res.render("userX", {user: result[0], game: result2});
+          }
+        })
+      }
+    })
+  }
+
+  // DRAFT FOR game_delete = 1
+  openDraft = (req, res) => {
+    let {id} = req.params;
+    
+    let sql = `SELECT * FROM user WHERE user_id = ?`;
+    let values = [id];
+
+    connection.query(sql, values, (err, result) => {
+      if(err){
+        throw err;
+      }
+      else {
+        let sqlGame = `SELECT * FROM game WHERE user_id = ? AND game_deleted = 1`;      
+        let valueGame = [id];
+
+        connection.query(sqlGame, valueGame, (err2, result2) => {
+          if(err2){
+            throw err2;
+          }
+          else {
+            res.render("draft", {user: result[0], game: result2});
           }
         })
       }

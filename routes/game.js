@@ -9,19 +9,21 @@ router.get("/nintendo", gameController.openNintendo);
 router.get("/PC", gameController.openPC);
 
 router.get("/shareUser/:user_id", gameController.openShareUser);
-router.post("/shareUser/:user_id", loadimg('images'), gameController.shareUser);
+router.post("/shareUser/:user_id", loadimg('games'), gameController.shareUser);
 
 /* falta */
 router.get("/share", gameController.openShare);
-router.post("share", loadimg('images'), gameController.share);
+router.post("/share", loadimg('games'), gameController.share);
 
 router.get("/gameEdit/:game_id", gameController.openEditGame);
-router.post("/gameEdit/:game_id/:user_id", loadimg('images'), gameController.edit);
+router.post("/gameEdit/:game_id/:user_id", loadimg('games'), gameController.edit);
 
-// todo NO FUNCIONA :( 
-/* router.get("/gameDel", gameController.gameDel);  */
-/* router.post("/gameDeleteLogic/:game_id", gameController.gameDeleteLogic); */
 
+
+// ? NO FUNCIONA :( 
+router.get("/gameDel/:game_id/:user_id", gameController.gameDel);  
+router.get("/gameDeleteLogic/:user_id", gameController.gameDeleteLogic); 
+router.get("/gamePublishDraft/:user_id", gameController.gamePublishDraft); 
 
 
 

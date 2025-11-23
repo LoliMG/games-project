@@ -2,15 +2,8 @@
 <html>
   <head>
     <title>GAMEVIEWS</title>
-    <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    >
-
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <%- include('modules/headlink.ejs') %>
+    
     <link rel="stylesheet" href="/stylesheets/index.css" />
     <link rel="stylesheet" href="/stylesheets/oneElem.css" />
 
@@ -18,44 +11,48 @@
   <body>
     <%- include('modules/header.ejs') %>
 
-    <main>
+    <main class="tomorrow-regular">
 
-      <section class="sect-backg">
-        <div class="title bg-dark ">
+      <section class="sect-backg justify-content-center">
+        <div class="title bg-dark bg-gradient">
           <h2 class="text-center pt-3 pb-2 text-white">Perfil de <%= user.name %></h2>   
           <div class="container-fluid pb-4 text-center">
-            <a href="/" class="btn btn-warning">Volver</a>
+            <a 
+            href="/" 
+            class="btn btn-outline-warning"
+            >Volver al inicio              
+            </a>
+            <a 
+              href="/user/userEdit/<%= user.user_id %>"
+              class="btn btn-outline-warning">Editar el perfil
+            </a>
           </div>
        </div>
-        <div class="user-info p-4">
-        <div 
-          class="card mb-3 container-fluid p-1" 
-          style="max-width: 600px;">
+
+       <div class="profile">
+        <div class="pad p-3">
+        <div class="card mb-3 bg-gradient bg-black text-white">          
           <div class="row g-0">
             <div class="col-md-4">
               <img 
                 src="/images/<%= user.avatar?user.avatar:'briar.jpg' %>" 
-                class="img-fluid rounded-start pt-2" 
+                class="img-fluid img-expand border border-1 border-black rounded-2" 
                 alt="..."
               >
             </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= user.name %></h5>
-                <p class="card-text">Email: <%= user.email %></p>
-                <p class="card-text">Bio: <%= user.bio %></p>
-             <div class="text-end">
-              <a 
-                href="/user/userEdit/<%= user.user_id %>"
-                class="btn btn-info">Editar
-              </a>
+              <div class="col-md-8 px-4">
+                  <p class="card-text"><%= user.email %></p>
+                  <p>Bio:</p>
+                  <div>
+                  <p class="card-text"><q><%= user.bio %></q></p>
+                  </div>
+                  <div class="text-end">                  
+              </div>
+              </div>
             </div>
-            </div>
-            </div>                
-          </div>    
           </div>
         </div>
-       
+      </div>        
       </section>
 
 
@@ -63,65 +60,68 @@
 
       <!-- GAMES -->
        <section class="section-users">
-        <div class="title bg-dark ">
-          <h2 class="text-center pt-3 pb-2">Juegos compartidos por <%= user.name %></h2>   
+        <div class="title bg-dark  bg-gradient">
+          <h2 class="text-center pt-3 pb-2 text-white">Juegos compartidos por <%= user.name %></h2>   
           <div class="container-fluid pb-4 text-center">
           <button 
             onclick="window.location.href='/game/shareUser/<%= user.user_id %>'"
-            class="btn btn-warning"
+            class="btn btn-outline-warning"
             >Añadir juego
           </button>
           <button 
-            onclick="window.location.href='/game/draft'"
-            class="btn btn-warning"
+            onclick="window.location.href='/user/draft/<%= user.user_id %>'"
+            class="btn btn-outline-warning"
             >Ver borradores
           </button>           
           </div>  
         </div>    
 
-      <div class="d-flex flex-wrap p-5">
+
+      <div class="p-5 d-flex flex-wrap">
+        <div class="row">
         <!-- FOR EACH -->
-        <% game.forEach((elem) => { %>
-        <div 
-          class="card mb-3 container-fluid" 
-          style="max-width: 600px;">
+        <% game.forEach((elem) => { %>          
+          <div class="col p-3">
+        <div class="game-card bg-gradient bg-black text-white">          
           <div class="row g-0">
             <div class="col-md-4">
               <img 
                 src="/images/<%= elem.cover?elem.cover:'briar.jpg' %>" 
-                class="img-fluid rounded-start pt-3" 
+                class="img-fluid img-expand" 
                 alt="..."
               >
             </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= elem.title %></h5>
-                <p class="card-text">Rating: <%= elem.rating %></p>
-                <p class="card-text">Plataforma: <%= elem.platform %></p>
-                <p class="card-text">Año de lanzamiento: <%= elem.release_year %></p>
-                <p class="card-text">Review: <%= elem.review %></p>
-                <div class="text-end">
-                <a 
-                  href="/game/gameEdit/<%= elem.game_id %>"
-                  class="btn btn-info">Editar
-                </a>
-      
+              <div class="col-md-8 px-4">
+                <h5 class="pt-2"><%= elem.title %></h5>
+                  <p>Valoración: <%= elem.rating %></p>
+                  <p class="">Plataforma: <%= elem.platform %></p>                  
+                  <p class=""><q><%= elem.review %></q></p>
+                 
+                  <div class="text-end">                  
+              <button 
+                    onclick="window.location.href='/game/gameEdit/<%= elem.game_id %>'"
+                    class="btn btn-outline-info">Editar
+                  </button>     
                 <button 
-                  onclick="window.location.href='/game/gameDeleteLogic/<%= elem.game_id %>'"
-                  class="btn btn-success">Borrador
-              </button>          
+                  onclick="window.location.href='/game/gameDeleteLogic/<%= elem.game_id %>/<%= user.user_id %>'"
+                  class="btn btn-outline-success">Borrador
+                </button>          
                 <button 
-                  onclick="window.location.href='/game/gameDelete/<%= elem.game_id %>'"
-                  class="btn btn-danger">Eliminar
-              </button>
+                  onclick="window.location.href='/game/gameDel/<%= elem.game_id %>/<%= user.user_id %>'"
+                  class="btn btn-outline-danger">Eliminar
+                </button>   
+                  </div>
               </div>
-              </div>                        
-            </div>          
+            </div>
           </div>
-        </div>
-
+        </div>         
         <% }); %>
+        </div>
       </div>
+
+
+
+    
       </section>
 
     

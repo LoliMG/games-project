@@ -1,5 +1,41 @@
 .sect-backg {
-  background-image: url("/images/296.jpg");
-  background-position: center;
-  background-size: cover;
+background: #000000;
+background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.745) 55%, rgba(0, 245, 233, 0.197) 100%);
+}
+
+.profile {  
+  display: flex;
+  justify-content: center;
+
+  .card {
+    border: 2px inset rgb(255, 239, 94);
+    &:hover {
+      outline: auto;
+    }
+  }
+  
+  .row {
+    padding: 2rem;
+    max-width: 540px; 
+    max-height: fit-content;
+  }
+
+}
+
+.game-card {  
+  border: 1px inset rgb(255, 239, 94);
+  
+  &:hover {
+    outline: auto;
+  }
+
+  width: 30rem;
+  border-radius: 1rem;
+   
+      
+  img {
+    height: 17.5rem;      
+    border-radius: 1rem 0 0 1rem;
+  }
+
 }

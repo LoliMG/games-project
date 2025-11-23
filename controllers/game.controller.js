@@ -4,12 +4,45 @@ class GameController {
   /* share */
   /* share general */
   openShare = (req, res) => {
-    const {game} = req.params;
-    res.render("share");
+    let sql = 'SELECT user_id, name FROM user WHERE user_deleted = 0';
+    
+    connection.query(sql, (err, result) => {
+      if(err){
+        throw err;
+      }
+      else {
+        res.render("share", {user: result, message: ""});
+      }
+    })    
   }
 
   share = (req, res) => {
-    res.redirect("/")
+    const {user_id, title, rating, platform, release_year, review} = req.body;
+
+    if (!user_id||!title||!rating||!platform||!release_year||!review||!req.body) {
+      let sql = 'SELECT user_id, name FROM user WHERE user_deleted = 0';
+      connection.query(sql, (err, result) => {
+        if(err) {
+          throw err;
+        }
+        else {
+          res.render("share", {user: result, message: "Rellena todos los campos."})
+        }      
+      })
+    }
+    else {
+      let sql = `INSERT INTO game (user_id, title, rating, platform, release_year, review, cover)
+                  VALUES (?,?,?,?,?,?,?)`;
+      let values = [user_id, title, rating, platform, release_year, review, req.file.filename];
+      connection.query(sql, values, (err, result) => {
+        if(err) {
+          throw err;
+        }
+        else {
+          res.redirect(`/user/userX/${user_id}`);
+        } 
+      })
+    }
   }
 
   /* share from profile */
@@ -214,9 +247,8 @@ class GameController {
   }
 
   // delete from 
- /* gameDel = (req, res) => { */
-    // todo INTENTO 1...
-   /*  const {game_id, user_id} = req.params;
+  gameDel = (req, res) => {       
+    const {game_id, user_id} = req.params;
     let sql = `DELETE FROM game WHERE game_id = ?`;
 
     connection.query(sql, [game_id], (err, result) => {
@@ -226,43 +258,42 @@ class GameController {
       else {
         res.redirect(`/user/userX/${user_id}`)
       }
-    })  */   
-
-      // todo INTENTO 2... 
-      /* const {id} = req.params;
-      let sql = `DELETE FROM game WHERE game_id = ${id}`;
-      
-      connection.query(sql, (err, result) => {
-        if(err){
-          throw err;
-        }
-        else {
-          const {user_id} = req.params;
-          let sql2 = `SELECT user.user_id FROM user 
-                      JOIN game ON game.user_id = user.user_id
-                      WHERE game.user_id = user.user_id`;
-          connection.query(sql2, (err2, result2) => {
-            if(err2){
-              throw err2;
-            }
-            else {
-              res.redirect(`/user/userX/${user_id}`)
-            }
-          })
-        } 
-      })
-  }*/
+    })    
+  }    
     
 
-  /* delete logic &  draft view */
+  /* delete logic */
+  gameDeleteLogic = (req, res) => {
+    const {game_id, user_id} = req.params;
+    let sql = `UPDATE game SET game_deleted = 1`;
 
-
-
-  openDraft = (req, res) => {
-    const {game, user} = req.params;
-    //xq xq xq
-    res.render("/game/draft/")
+    connection.query(sql, [game_id], (err, result) => {
+      if(err){
+        throw err;
+      }
+      else {
+        res.redirect(`/user/userX/${user_id}`)
+      }
+    })
   }
+
+  /* publish draft */
+  gamePublishDraft = (req, res) => {
+    const {game_id, user_id} = req.params;
+    let sql = `UPDATE game SET game_deleted = 0`;
+
+    connection.query(sql, [game_id], (err, result) => {
+      if(err){
+        throw err;
+      }
+      else {
+        res.redirect(`/user/userX/${user_id}`)
+      }
+    })
+  }
+
+
+  
 
 }
  

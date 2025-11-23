@@ -1,12 +1,15 @@
-<header>
+<link rel="stylesheet" href="/stylesheets/style.css" />
+
+
+<header class="tomorrow-regular">
   <nav
-    class="navbar navbar-expand-lg p-3 fs-4 bg-body-tertiary"
+    class="navbar navbar-expand-lg p-3 fs-4 bg-black bg-gradient"
     data-bs-theme="dark" 
     style="min-height: 10dvh;"
   >
     <div class="container-fluid">
       <a
-        class="navbar-brand"
+        class="navbar-brand fs-2 p-1 px-2 tomorrow-bold"        
         href="/"
       >GAMEVIEWS</a>
       <button
@@ -30,13 +33,13 @@
             <a
               class="nav-link active"
               href="/game/share"
-            >Compartir</a>
+            >COMPARTE</a>
           </li>
           <li class="nav-item">
             <a
               class="nav-link active"
               href="/game/allGames"
-            >Reviews</a>
+            >JUEGOS</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -46,7 +49,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Plataformas
+              PLATAFORMAS
             </a>
             <ul class="dropdown-menu">
               <li><a
@@ -66,8 +69,8 @@
         </ul>
       </div>
       <div class="navBtns d-flex gap-2 pt-2">
-        <button  onclick="window.location.href='/user/login'" class="btn btn-info">LOGIN</button>
-        <button onclick="window.location.href='/user/register'" class="btn btn-info">REGISTRARSE</button>
+<!--         <button  onclick="window.location.href='/user/login'" class="btn btn-outline-warning">LOGIN</button> -->
+        <button onclick="window.location.href='/user/register'" class="btn btn-outline-warning">REGISTRARSE</button>
       </div>
     </div>
 

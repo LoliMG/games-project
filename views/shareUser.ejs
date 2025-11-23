@@ -2,22 +2,16 @@
 <html>
   <head>
     <title>GAMEVIEWS</title>
-    <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    >
+    
+    <%- include('modules/headlink.ejs') %>
 
-    <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/form.css" />
 
   </head>
   <body>
     <%- include('modules/header.ejs') %>
 
-    <main>
+    <main class="tomorrow-regular">
       <section>
         <h1 class="text-center p-3 bg-dark text-white">Comparte una review</h1>
         <br>
@@ -41,8 +35,7 @@
                 id="title"
                 name="title"
               >                    
-              </div>
-              
+              </div>              
               <div>        
               <label for="" class="pt-2">Valoración</label>
               <input type="number" min="1" max="5" name="rating" id="rating">
@@ -96,7 +89,7 @@
             <div class="text-center">
               <button class="btn btn-info">Enviar</button>
               <button class="btn btn-info" type="reset">Limpiar</button>
-              <a href="/" class="btn btn-info">Cancelar</a>
+              <a href="/user/userX/<%= user_id %>" class="btn btn-info">Cancelar</a>
             </div>
           </form>
             </div>

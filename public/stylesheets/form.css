@@ -2,12 +2,13 @@
   max-width: 30rem;  
   padding: 3rem;
   border-radius: 1rem;
-  
+  border: 2px goldenrod solid;
   @media (width <= 700px) {
     width: fit-content;
   }
 
   form {    
+    
     input, textarea, select {
       border: none;
       background-color: rgb(241, 241, 241);
@@ -15,14 +16,12 @@
       min-width: 100%;
       border-radius: 0.5rem;     
     }    
-  }
-  
+  }  
   
 }
 
 section  {  
   .btn {
     font-size: 1.2rem;
-  }
-  
+  }  
 }
