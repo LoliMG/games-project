@@ -3,6 +3,7 @@
   padding: 3rem;
   border-radius: 1rem;
   border: 2px goldenrod solid;
+  
   @media (width <= 700px) {
     width: fit-content;
   }

@@ -85,7 +85,7 @@
           <div class="row g-0">
             <div class="col-4">
               <img 
-                src="/images/<%= elem.avatar?elem.avatar:'briar.jpg' %>" 
+                src="/images/users/<%= elem.avatar?elem.avatar:'briar.jpg' %>" 
                 class="img-fluid img-expand" 
                 alt="..."
               >
@@ -94,11 +94,14 @@
                   <h3 class="card-title"><%= elem.name %></h3>
                   <div>
                   <p class="card-text"><q><%= elem.bio %></q></p>
+                  
                   </div>
-                  <div class="text-end pt-2">
+                  <div class="pt-2 d-flex ">
+                  <p class="px-1"
+                  >Reviews: <span class="text-warning"><%= elem.reviews %></span></p> 
                   <button 
                   onclick="window.location.href='/user/userX/<%= elem.user_id %>'"
-                  class="btn btn-outline-warning">Ver perfil
+                  class="btn btn-outline-warning mx-auto">Ver perfil
                 </button>
               </div>
               </div>

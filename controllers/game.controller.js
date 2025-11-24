@@ -55,9 +55,6 @@ class GameController {
     const {user_id} = req.params;
     const {title, rating, platform, release_year, review} = req.body;
 
-    console.log(req.params);
-    console.log(req.body);
-
     if(!title||!rating||!platform||!release_year||!review) {
       res.render("shareUser", {message: "¡Rellene todos los campos!", user_id: user_id})
     }
@@ -120,14 +117,12 @@ class GameController {
 
   // ALL THE GAMES AND EACH VIEW FOR PLATFORM 
   openAllGames = (req, res) => {
-    let sql = `SELECT game.*, user.* FROM game 
-                      LEFT JOIN user ON game.user_id = user.user_id
+    let sql = `SELECT game.*, user.name FROM game 
+                  LEFT JOIN user ON game.user_id = user.user_id
                 WHERE game_deleted = 0
                 ORDER BY title`;
-
+    
     connection.query(sql, (err, result) => {
-      // TODO: NO CONSIGO QUE FUNCIONE LO DE VER EL NOMBRE DE USUARIO :( 
-      // * PERO SI PULSAS, SÍ TE LLEVA
       if(err){
        throw err;
       }
@@ -151,15 +146,13 @@ class GameController {
   } 
 
   openPlayStation = (req, res) => {
-    let sql = `SELECT game.*, user.* FROM game 
+    let sql = `SELECT game.*, user.name FROM game 
                       LEFT JOIN user ON game.user_id = user.user_id
                 WHERE game_deleted = 0
                 AND game.platform = "PlayStation"
                 ORDER BY title`;
 
   connection.query(sql, (err, result) => {
-    // TODO: NO CONSIGO QUE FUNCIONE LO DE VER EL NOMBRE DE USUARIO :( 
-    // * PERO SI PULSAS, SÍ TE LLEVA
     if(err){
       throw err;
     }
@@ -183,15 +176,13 @@ class GameController {
   }
 
   openPC = (req, res) => {
-    let sql = `SELECT game.*, user.* FROM game 
+    let sql = `SELECT game.*, user.name FROM game 
                       LEFT JOIN user ON game.user_id = user.user_id
                 WHERE game_deleted = 0
                 AND game.platform = "PC"
                 ORDER BY title`;
 
     connection.query(sql, (err, result) => {
-      // TODO: NO CONSIGO QUE FUNCIONE LO DE VER EL NOMBRE DE USUARIO :( 
-      // * PERO SI PULSAS, SÍ TE LLEVA
       if(err){
        throw err;
       }
@@ -215,15 +206,13 @@ class GameController {
   }
 
   openNintendo = (req, res) => {
-    let sql = `SELECT game.*, user.* FROM game 
+    let sql = `SELECT game.*, user.name FROM game 
                       LEFT JOIN user ON game.user_id = user.user_id
                 WHERE game_deleted = 0
                 AND game.platform = "nintendo"
                 ORDER BY title`;
 
     connection.query(sql, (err, result) => {
-      // TODO: NO CONSIGO QUE FUNCIONE LO DE VER EL NOMBRE DE USUARIO :( 
-      // * PERO SI PULSAS, SÍ TE LLEVA
       if(err){
        throw err;
       }
@@ -265,7 +254,7 @@ class GameController {
   /* delete logic */
   gameDeleteLogic = (req, res) => {
     const {game_id, user_id} = req.params;
-    let sql = `UPDATE game SET game_deleted = 1`;
+    let sql = `UPDATE game SET game_deleted = 1 WHERE game_id = ?`;
 
     connection.query(sql, [game_id], (err, result) => {
       if(err){
@@ -280,7 +269,7 @@ class GameController {
   /* publish draft */
   gamePublishDraft = (req, res) => {
     const {game_id, user_id} = req.params;
-    let sql = `UPDATE game SET game_deleted = 0`;
+    let sql = `UPDATE game SET game_deleted = 0 WHERE game_id = ?`;
 
     connection.query(sql, [game_id], (err, result) => {
       if(err){

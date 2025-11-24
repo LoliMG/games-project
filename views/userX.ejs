@@ -35,7 +35,7 @@
           <div class="row g-0">
             <div class="col-md-4">
               <img 
-                src="/images/<%= user.avatar?user.avatar:'briar.jpg' %>" 
+                src="/images/users/<%= user.avatar?user.avatar:'briar.jpg' %>" 
                 class="img-fluid img-expand border border-1 border-black rounded-2" 
                 alt="..."
               >
@@ -86,14 +86,21 @@
           <div class="row g-0">
             <div class="col-md-4">
               <img 
-                src="/images/<%= elem.cover?elem.cover:'briar.jpg' %>" 
+                src="/images/games/<%= elem.cover?elem.cover:'briar.jpg' %>" 
                 class="img-fluid img-expand" 
                 alt="..."
               >
             </div>
               <div class="col-md-8 px-4">
                 <h5 class="pt-2"><%= elem.title %></h5>
-                  <p>Valoración: <%= elem.rating %></p>
+                 <!-- JAVASCRIPT SE PONE ASÍ -->
+                  <% let starrating = ``;  %>
+                   <%  for (let i = 0; i < elem.rating; i++) {   %>
+                   <% starrating += `★`;  %>
+                   <% }   %>
+                 <p>  
+                  Valoración: <%= starrating %>
+                 </p> 
                   <p class="">Plataforma: <%= elem.platform %></p>                  
                   <p class=""><q><%= elem.review %></q></p>
                  

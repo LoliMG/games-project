@@ -22,8 +22,8 @@ router.post("/gameEdit/:game_id/:user_id", loadimg('games'), gameController.edit
 
 // ? NO FUNCIONA :( 
 router.get("/gameDel/:game_id/:user_id", gameController.gameDel);  
-router.get("/gameDeleteLogic/:user_id", gameController.gameDeleteLogic); 
-router.get("/gamePublishDraft/:user_id", gameController.gamePublishDraft); 
+router.get("/gameDeleteLogic/:game_id/:user_id", gameController.gameDeleteLogic); 
+router.get("/gamePublishDraft/:game_id/:user_id", gameController.gamePublishDraft); 
 
 
 
